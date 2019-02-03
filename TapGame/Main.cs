@@ -17,6 +17,8 @@ namespace TapGame.Shared
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static int WIDTH, HEIGHT;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,6 +36,12 @@ namespace TapGame.Shared
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+
+            WIDTH = GraphicsDevice.Viewport.Width;
+            HEIGHT = GraphicsDevice.Viewport.Height;
+
+
+            TextureManager.initialize(GraphicsDevice);
         }
 
         /// <summary>
@@ -76,8 +84,11 @@ namespace TapGame.Shared
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
             //TODO: Add your drawing code here
+            spriteBatch.Draw(TextureManager.WHITE_SQUARE, new Rectangle(0, 0, 200, 200), Color.White);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
