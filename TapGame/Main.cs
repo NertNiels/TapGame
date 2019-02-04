@@ -1,13 +1,14 @@
 ﻿#region Using Statements
 using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
+using TapGame.UI;
 
 #endregion
 
-namespace TapGame.Shared
+namespace TapGame
 {
     /// <summary>
     /// This is the main type for your game.
@@ -17,6 +18,10 @@ namespace TapGame.Shared
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        UIManager UIManager;
+
+        Color bg = Color.CornflowerBlue;
+
         public static int WIDTH, HEIGHT;
 
         public Main()
@@ -24,6 +29,7 @@ namespace TapGame.Shared
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -39,11 +45,18 @@ namespace TapGame.Shared
 
             WIDTH = GraphicsDevice.Viewport.Width;
             HEIGHT = GraphicsDevice.Viewport.Height;
+            
 
 
             TextureManager.initialize(GraphicsDevice);
-        }
 
+            UIManager = new UIManager();
+            Button tapButton = new Button(WIDTH/2 - WIDTH/4, HEIGHT-HEIGHT/8, WIDTH/2, HEIGHT/12);
+            UIManager.addView(tapButton);
+            Button phone = new Button(WIDTH/2 - WIDTH/4, HEIGHT/2 - HEIGHT / 4, WIDTH / 2, HEIGHT / 2);
+            UIManager.addView(phone);
+        }
+        
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -65,6 +78,11 @@ namespace TapGame.Shared
         {
             // For Mobile devices, this logic will close the Game when the Back button is pressed
             // Exit() is obsolete on iOS
+
+            TouchCollection collection = TouchPanel.GetState();
+            UIManager.onTouch(collection);
+            UIManager.update(gameTime);
+
 #if !__IOS__ && !__TVOS__
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -82,11 +100,11 @@ namespace TapGame.Shared
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(bg);
 
             spriteBatch.Begin();
             //TODO: Add your drawing code here
-            spriteBatch.Draw(TextureManager.WHITE_SQUARE, new Rectangle(0, 0, 200, 200), Color.White);
+            UIManager.draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

@@ -2,7 +2,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using TapGame.Shared;
+using TapGame;
 
 namespace TapGame.Android
 {
@@ -22,7 +22,30 @@ namespace TapGame.Android
             var g = new Main();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
+
+
+
+            View vw = (View)g.Services.GetService(typeof(View));
+            vw.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.HideNavigation | (StatusBarVisibility)SystemUiFlags.ImmersiveSticky;
+            vw.SetOnSystemUiVisibilityChangeListener(new MyUiVisibilityChangeListener(vw));
         }
+
+        private class MyUiVisibilityChangeListener : Java.Lang.Object, View.IOnSystemUiVisibilityChangeListener
+        {
+            View targetView;
+            public MyUiVisibilityChangeListener(View v)
+            {
+                targetView = v;
+            }
+            public void OnSystemUiVisibilityChange(StatusBarVisibility v)
+            {
+                if (targetView.SystemUiVisibility != ((StatusBarVisibility)SystemUiFlags.HideNavigation | (StatusBarVisibility)SystemUiFlags.Immersive))
+                {
+                    targetView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.HideNavigation | (StatusBarVisibility)SystemUiFlags.ImmersiveSticky;
+                }
+            }
+        }
+        
     }
 }
 

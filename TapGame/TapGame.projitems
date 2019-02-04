@@ -11,6 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextureManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UIManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\OnClickListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\OnTouchListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Touch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\View.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
