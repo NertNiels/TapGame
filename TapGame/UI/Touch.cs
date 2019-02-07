@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TapGame.UI
 {
-    class TouchEvent
+    public class TouchEvent
     {
         public int X, Y;
         public TouchState State;
@@ -17,7 +17,7 @@ namespace TapGame.UI
         }
     }
 
-    enum TouchState
+    public enum TouchState
     {
         Invalid,
         Moved,

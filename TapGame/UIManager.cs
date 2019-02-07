@@ -8,7 +8,7 @@ using TapGame.UI;
 
 namespace TapGame
 {
-    class UIManager
+    public class UIManager
     {
 
         List<View> views;

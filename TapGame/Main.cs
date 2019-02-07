@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using TapGame.Game;
 using TapGame.UI;
 
 #endregion
@@ -13,7 +14,7 @@ namespace TapGame
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Main : Game
+    public class Main : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -23,6 +24,8 @@ namespace TapGame
         Color bg = Color.CornflowerBlue;
 
         public static int WIDTH, HEIGHT;
+
+        public GameManager gameManager;
 
         public Main()
         {
@@ -51,10 +54,7 @@ namespace TapGame
             TextureManager.initialize(GraphicsDevice);
 
             UIManager = new UIManager();
-            Button tapButton = new Button(WIDTH/2 - WIDTH/4, HEIGHT-HEIGHT/8, WIDTH/2, HEIGHT/12);
-            UIManager.addView(tapButton);
-            Button phone = new Button(WIDTH/2 - WIDTH/4, HEIGHT/2 - HEIGHT / 4, WIDTH / 2, HEIGHT / 2);
-            UIManager.addView(phone);
+            gameManager = new GameManager(UIManager);
         }
         
         /// <summary>
@@ -104,6 +104,8 @@ namespace TapGame
 
             spriteBatch.Begin();
             //TODO: Add your drawing code here
+            gameManager.draw(spriteBatch);
+
             UIManager.draw(spriteBatch);
 
             spriteBatch.End();

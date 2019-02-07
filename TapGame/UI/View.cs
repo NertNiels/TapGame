@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TapGame.UI
 {
-    abstract class View
+    public abstract class View
     {
         public delegate void onClickListener(TouchEvent e);
         public delegate void onTouchListener(TouchEvent e);
@@ -22,6 +22,7 @@ namespace TapGame.UI
         public Rectangle bound { get { return new Rectangle(x, y, width, height); } }
 
         public bool pressed = false;
+        public bool isDrawed = true;
         
         public View()
         {

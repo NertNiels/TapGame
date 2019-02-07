@@ -9,6 +9,8 @@
     <Import_RootNamespace>TapGame</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Game\GameManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\Room.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextureManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UIManager.cs" />
