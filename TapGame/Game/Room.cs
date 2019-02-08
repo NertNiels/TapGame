@@ -11,17 +11,18 @@ namespace TapGame.Game
     {
         public static int RoomHeight { get { return (int)(RoomWidth * 2f); } }
         public static int RoomWidth = 300;
-        
+
+        public RoomSide roomSide;
+        public int indexFromUnder;
         public Button boundsButton;
 
         public Room(RoomSide roomSide, int indexFromUnder, UIManager ui)
         {
-            int x = 0;
-            if (roomSide == RoomSide.Right) x = Main.WIDTH-RoomWidth;
+            this.roomSide = roomSide;
+            this.indexFromUnder = indexFromUnder;
 
-            int y = Main.HEIGHT -(RoomHeight * (indexFromUnder+1)) - RoomHeight;
-
-            boundsButton = new Button(x, y, RoomWidth, RoomHeight, true);
+            boundsButton = new Button(0, 0, RoomWidth, RoomHeight, false);
+            updateViewport();
             ui.addView(boundsButton);
         }
 
@@ -32,7 +33,21 @@ namespace TapGame.Game
 
         public void draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.WHITE_SQUARE, boundsButton.bound, Color.DimGray);
+            spriteBatch.Draw(TextureManager.OFFICE_1_DEMO, boundsButton.bound, Color.White);
+        }
+
+        public void updateViewport()
+        {
+            int x = 0;  
+            if (roomSide == RoomSide.Right) x = Main.WIDTH-RoomWidth;
+
+            int y = Main.HEIGHT -(RoomHeight * (indexFromUnder+1)) - RoomHeight;
+
+            boundsButton.x = x;
+            boundsButton.y = y;
+            boundsButton.width = RoomWidth;
+            boundsButton.height = RoomHeight;
+
         }
     }
 

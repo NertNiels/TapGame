@@ -49,12 +49,10 @@ namespace TapGame
             WIDTH = GraphicsDevice.Viewport.Width;
             HEIGHT = GraphicsDevice.Viewport.Height;
             
-
-
-            TextureManager.initialize(GraphicsDevice);
-
             UIManager = new UIManager();
             gameManager = new GameManager(UIManager);
+
+
         }
         
         /// <summary>
@@ -67,6 +65,8 @@ namespace TapGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //TODO: use this.Content to load your game content here 
+            TextureManager.initialize(GraphicsDevice, Content);
+            FontManager.initialize(Content);
         }
 
         /// <summary>
@@ -78,6 +78,12 @@ namespace TapGame
         {
             // For Mobile devices, this logic will close the Game when the Back button is pressed
             // Exit() is obsolete on iOS
+
+            if (WIDTH != GraphicsDevice.Viewport.Width)
+            {
+                WIDTH = GraphicsDevice.Viewport.Width;
+                gameManager.updateViewport();
+            }
 
             TouchCollection collection = TouchPanel.GetState();
             UIManager.onTouch(collection);
@@ -92,6 +98,8 @@ namespace TapGame
 #endif
             // TODO: Add your update logic here			
             base.Update(gameTime);
+
+            gameManager.update(gameTime);
         }
 
         /// <summary>
@@ -102,7 +110,7 @@ namespace TapGame
         {
             GraphicsDevice.Clear(bg);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             //TODO: Add your drawing code here
             gameManager.draw(spriteBatch);
 
@@ -111,5 +119,7 @@ namespace TapGame
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+        
     }
 }

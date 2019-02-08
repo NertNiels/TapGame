@@ -16,8 +16,11 @@ namespace TapGame.UI
 
         public int width;
         public int height;
-        public int x;
-        public int y;
+        public int x { get { return (int)position.X; } set { position.X = value; } }
+        public int y { get { return (int)position.Y; } set { position.Y = value; } }
+        public Vector2 position;
+
+        public float scale = 1.0f;
 
         public Rectangle bound { get { return new Rectangle(x, y, width, height); } }
 

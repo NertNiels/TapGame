@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\OnClickListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\OnTouchListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Text.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Touch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\View.cs" />
   </ItemGroup>
